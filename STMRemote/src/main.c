@@ -28,7 +28,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
-#include "stm32f0xx_gpio.h"
 #include "tsl_user.h"
 
 /* Private typedefs ----------------------------------------------------------*/
@@ -40,8 +39,13 @@
 /* Private functions prototype -----------------------------------------------*/
 
 void Init_Std_GPIOs(void);
+void User_Button_Init(void);
+void USART_user_Init(void);
 void ProcessSensors(void);
 void SystickDelay(__IO uint32_t nTime);
+
+void writeString(char *str);
+void writeChar(char ch);
 
 /* Global variables ----------------------------------------------------------*/
 
@@ -78,29 +82,16 @@ int main(void)
   TSL_user_Init();
 	
 	//============================================================================
-  // Init Other Stuff
+  // Init User Button with EXTI interrupt
   //============================================================================  
 
-	{
-		// Enable the SYSCFG clock
-		RCC->APB2ENR |= RCC_APB2ENR_SYSCFGCOMPEN;
-		
-		// Use SYSCFG to route PA0 to EXTI0
-		SYSCFG->EXTICR[0] = SYSCFG_EXTICR1_EXTI0_PA;
-		
-		// Enable external interrupt for EXTI0, rising edge trigger
-		EXTI->IMR = 0x1; //EXTI_IMR_MR0_Msk;
-		EXTI->RTSR = 0x1; //EXTI_RTSR_TR0_Msk;
+	User_Button_Init();
+	
+	//============================================================================
+  // Init USART
+  //============================================================================  
 
-		// Enable the interrupt with NVIC, set priority 1
-		NVIC_EnableIRQ(EXTI0_1_IRQn);
-		NVIC_SetPriority(EXTI0_1_IRQn, 1);
-		
-		// Set the user button (PA0) to input, low-speed, pull-down
-		GPIOA->MODER &= ~(0x3);
-		GPIOA->OSPEEDR &= ~(0x3);
-		GPIOA->PUPDR = 0x1;
-	}
+	USART_user_Init();
 
   //============================================================================
   // Main loop
@@ -164,42 +155,129 @@ void Init_Std_GPIOs(void)
 
 
 /**
+  * @brief  Initializes the User Button, including EXTI interrupt
+  * @param  None
+  * @retval None
+  */
+void User_Button_Init(void)
+{
+	// Enable the SYSCFG clock
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGCOMPEN;
+	
+	// Use SYSCFG to route PA0 to EXTI0
+	SYSCFG->EXTICR[0] = SYSCFG_EXTICR1_EXTI0_PA;
+	
+	// Enable external interrupt for EXTI0, rising edge trigger
+	EXTI->IMR = EXTI_IMR_MR0;
+	EXTI->RTSR = EXTI_RTSR_TR0;
+
+	// Enable the interrupt with NVIC, set priority 1
+	NVIC_EnableIRQ(EXTI0_1_IRQn);
+	NVIC_SetPriority(EXTI0_1_IRQn, 1);
+	
+	// Set the user button (PA0) to input, low-speed, pull-down
+	GPIOA->MODER &= ~(0x3);
+	GPIOA->OSPEEDR &= ~(0x3);
+	GPIOA->PUPDR = 0x1;
+}
+
+
+/**
+  * @brief  Initializes the USART
+  * @param  None
+  * @retval None
+  */
+void USART_user_Init()
+{
+	RCC->APB2ENR |= (RCC_APB2ENR_USART1EN);
+	
+	// Set PA9/10 to alternate function mode
+	GPIOA->MODER |= 0x280000; GPIOA->MODER &= ~0x140000;
+	
+	// Select USART_1 RX/TX function for PA9/10
+	GPIOA->AFR[1] &= ~(0xFF0);
+	GPIOA->AFR[1] |= 0x110;
+	
+	/** USART_1 setup **/
+	{
+		// Set the baud rate to 115200
+		USART1->BRR = SystemCoreClock/115200;
+		
+		// Enable Transmitter and Receiver
+		USART1->CR1 |= 0XC;
+		
+		// Enable RXNE interrupt in USART1 and NVIC
+		//USART1->CR1 |= 0x20;
+		//NVIC_EnableIRQ(USART1_IRQn);
+		//NVIC_SetPriority(USART1_IRQn, 1);
+		
+		// LAST, enable the USART itself
+		USART1->CR1 |= 0x1;
+	}
+}
+
+
+/**
   * @brief  Manage the activity on sensors when touched/released (example)
   * @param  None
   * @retval None
   */
 void ProcessSensors(void)
 {
+	uint8_t pos = MyLinRots[0].p_Data->Position;
+	
   // Due to LED6 shared between the ECS activity and Linear position
   if (!Gv_ProcessSensor && MyLinRots[0].p_Data->StateId == TSL_STATEID_RELEASE)
   {
     return;
   }
+	
+	writeString("t: ");
+	writeChar(pos);
+	writeString("\r\n");
  
   LED3_OFF;
   LED4_OFF;
   LED5_OFF;
   LED6_OFF;
-
-  if (MyLinRots[0].p_Data->Position <= 112)
+	
+  if (pos <= 112)
   {
     LED3_ON;
   }
 
-  if (MyLinRots[0].p_Data->Position <= 80)
+  if (pos <= 80)
   {
     LED5_ON;
   }
 
-  if (MyLinRots[0].p_Data->Position <= 48)
+  if (pos <= 48)
   {
     LED6_ON;
   }
 
-  if (MyLinRots[0].p_Data->Position <= 16)
+  if (pos <= 16)
   {
     LED4_ON;
   }
+}
+
+
+/** Write a string over USART_1
+*/
+void writeString(char *str) {
+	while (*str) {
+		writeChar(*str); str++;
+	}
+}
+
+/** Write a single character over USART_1
+*/
+void writeChar(char ch) {
+	// Wait for transmit register to be empty
+	while ((USART1->ISR & 0x80) != 0x80) {}
+		
+	USART1->TDR = ch;
 }
 
 
@@ -284,7 +362,8 @@ void SystickDelay(__IO uint32_t nTime)
   Gv_SystickCounter = nTime;
   while (Gv_SystickCounter != 0)
   {
-    // The Gv_SystickCounter variable is decremented every ms by the Systick interrupt routine  
+    // The Gv_SystickCounter variable is decremented every ms by the Systick interrupt routine
+		__WFI();
   }
 }
 
