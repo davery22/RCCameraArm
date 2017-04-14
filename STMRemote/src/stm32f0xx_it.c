@@ -41,6 +41,15 @@
 extern __IO uint32_t Gv_SystickCounter;
 extern __IO uint32_t Gv_EOA;
 
+extern __IO uint8_t Touch_Sensor_Position;
+extern __IO uint16_t Gyro_Y;
+extern __IO uint16_t Gyro_Z;
+__IO uint8_t User_Button_State;
+
+extern void PollGyro(void);
+extern void USART1WriteChar(char);
+extern void USART1WriteString(char*);
+
 /******************************************************************************/
 /*            Cortex-M0 Processor Exceptions Handlers                         */
 /******************************************************************************/
@@ -86,7 +95,7 @@ void PendSV_Handler(void)
 }
 
 /**
-  * @brief  This function handles SysTick Handler.
+  * @brief  This function handles SysTick Handler, which is configured to go off every 1 ms.
   * @param  None
   * @retval None
   */
@@ -97,6 +106,7 @@ void SysTick_Handler(void)
   {
     Gv_SystickCounter--;
   }
+	
   // TSL timing for ECS, DTO, ...
   TSL_tim_ProcessIT();
 }
@@ -116,10 +126,56 @@ void SysTick_Handler(void)
 void EXTI0_1_IRQHandler(void)
 {
 	// Clear the interrupt
-	EXTI->PR |= 0x1; //EXTI_PR_PR0_Msk;
+	EXTI->PR |= EXTI_PR_PR0;
 	
 	// Do something else
-	LED6_TOGGLE;
+	User_Button_State = !User_Button_State;
+}
+
+/**
+  * @brief  This function handles the TIM3 interrupt.
+  * @param  None
+  * @retval None
+	*/
+void TIM3_IRQHandler(void)
+{
+	// Clear the interrupt
+	TIM3->SR &= ~TIM_SR_UIF;
+	
+	PollGyro();
+}
+
+/**
+  * @brief  This function handles the TIM2 interrupt.
+  * @param  None
+  * @retval None
+	*/
+void TIM2_IRQHandler(void)
+{
+	// Clear the interrupt
+	TIM2->SR &= ~TIM_SR_UIF;
+	
+	// Write system status
+	{
+		// TODO: Remove offset 48
+		USART1WriteChar('t');
+		USART1WriteChar(Touch_Sensor_Position + 48);
+		USART1WriteChar(',');
+		
+		USART1WriteChar('b');
+		USART1WriteChar(User_Button_State + 48);
+		USART1WriteChar(',');
+		
+		USART1WriteChar('y');
+		USART1WriteChar((Gyro_Y >> 8));
+		USART1WriteChar((Gyro_Y & 0xFF));
+		USART1WriteChar(',');
+		
+		USART1WriteChar('z');
+		USART1WriteChar((Gyro_Z >> 8));
+		USART1WriteChar((Gyro_Z & 0xFF));
+		USART1WriteString("\r\n");
+	}
 }
 
 /**

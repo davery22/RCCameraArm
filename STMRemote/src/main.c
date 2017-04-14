@@ -40,16 +40,23 @@
 
 void Init_Std_GPIOs(void);
 void User_Button_Init(void);
-void USART_user_Init(void);
+void USART1_user_Init(void);
+void I2C2_user_Init(void);
+	void InitializeGyro(void);
+void TIM2_user_Init(void);
+void TIM3_user_Init(void);
 void ProcessSensors(void);
 void SystickDelay(__IO uint32_t nTime);
 
-void writeString(char *str);
-void writeChar(char ch);
+void USART1WriteString(char *str);
+void USART1WriteChar(char ch);
 
 /* Global variables ----------------------------------------------------------*/
 
 __IO uint32_t Gv_SystickCounter;
+__IO uint8_t Touch_Sensor_Position;
+__IO uint16_t Gyro_Y;
+__IO uint16_t Gyro_Z;
 
 
 /**
@@ -91,7 +98,20 @@ int main(void)
   // Init USART
   //============================================================================  
 
-	USART_user_Init();
+	USART1_user_Init();
+	
+	//============================================================================
+  // Init I2C2
+  //============================================================================  
+
+	I2C2_user_Init();
+	
+	//============================================================================
+  // Init TIM2 and TIM3
+  //============================================================================  
+
+	TIM2_user_Init(); // Used to write to USART periodically
+	TIM3_user_Init(); // Used to poll the gyro sensor periodically
 
   //============================================================================
   // Main loop
@@ -155,7 +175,7 @@ void Init_Std_GPIOs(void)
 
 
 /**
-  * @brief  Initializes the User Button, including EXTI interrupt
+  * @brief  Initializes the User Button, including EXTI interrupt (uses PA0)
   * @param  None
   * @retval None
   */
@@ -183,13 +203,13 @@ void User_Button_Init(void)
 
 
 /**
-  * @brief  Initializes the USART
+  * @brief  Initializes USART1 (uses PA9,PA10)
   * @param  None
   * @retval None
   */
-void USART_user_Init()
+void USART1_user_Init(void)
 {
-	RCC->APB2ENR |= (RCC_APB2ENR_USART1EN);
+	RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
 	
 	// Set PA9/10 to alternate function mode
 	GPIOA->MODER |= 0x280000; GPIOA->MODER &= ~0x140000;
@@ -204,7 +224,7 @@ void USART_user_Init()
 		USART1->BRR = SystemCoreClock/115200;
 		
 		// Enable Transmitter and Receiver
-		USART1->CR1 |= 0XC;
+		USART1->CR1 |= 0xC;
 		
 		// Enable RXNE interrupt in USART1 and NVIC
 		//USART1->CR1 |= 0x20;
@@ -214,6 +234,131 @@ void USART_user_Init()
 		// LAST, enable the USART itself
 		USART1->CR1 |= 0x1;
 	}
+}
+
+
+/**
+  * @brief  Initializes I2C2
+  * @param  None
+  * @retval None
+  */
+void I2C2_user_Init(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_I2C2EN;
+	
+	// Set PB11/13 to alternate function, open-drain, AF = I2C2_SDA/I2C2_SCL respectively
+	GPIOB->MODER |= 0x08800000; GPIOB->MODER &= ~(0x04400000);
+	GPIOB->OTYPER |= 0x2800;
+	GPIOB->AFR[1] |= 0x00501000; GPIOB->AFR[1] &= ~(0x00A0E000);
+	
+	// Set PB14 and PC0 to output, push-pull, initial high
+	GPIOB->MODER |= 0x10000000; GPIOB->MODER &= ~(0x20000000);
+	GPIOB->OTYPER &= ~(0x4000);
+	GPIOB->ODR |= 0x4000; // Controls SD0 - lsb of gyro slave address (high => 0x6B)
+	
+	GPIOC->MODER |= 0x1; GPIOC->MODER &= ~(0x2);
+	GPIOC->OTYPER &= ~(0x1);
+	GPIOC->ODR |= 0x1;
+	
+	// I2C2 peripheral initial setup
+	{
+		// Setup peripheral to use 100kHz standard mode
+		// (PRESC = 1, SCLDEL = 0x4, SDADEL = 0x2, SCLH = 0xF, SCLL = 0x13)
+		I2C2->TIMINGR |= 0x10420F13; I2C2->TIMINGR &= 0x1F420F13;
+		
+		// Enable I2C2
+		I2C2->CR1 |= 0x1;
+	}
+	
+	// Initialize the Gyro Sensor via I2C2
+	InitializeGyro();
+}
+
+
+/**
+  * @brief  Initializes the Gyro Sensor via I2C2.
+  * @param  None
+  * @retval None
+  */
+void InitializeGyro(void)
+{
+	// Write configuration to CR1
+	{
+		// Initial I2C write (SADD[7:1] = 0x6B [gyro addr], NBYTES = 3, RD_WRN = 0 [write], START = 1)
+		I2C2->CR2 |= (0x6B << 1); I2C2->CR2 &= ~(0x28);
+		I2C2->CR2 |= 0x00020000; I2C2->CR2 &= 0xFF02FFFF;
+		I2C2->CR2 &= ~0x0400;
+		I2C2->CR2 |= 0x2000;
+		
+		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}LED6_ON;
+		
+		// Write the address of the gyro's CR1 register
+		I2C2->TXDR = 0x20;
+			
+		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		
+		// Write the configuration bit pattern
+		I2C2->TXDR = 0x0B;
+		
+		while (!(I2C2->ISR & I2C_ISR_TC)) {}
+			
+		// End the transfer (set STOP bit)
+		I2C2->CR2 |= 0x4000;
+	}
+}
+
+
+/**
+  * @brief  Initializes TIM2 to fire an interrupt at a certain interval.
+  * @param  None
+  * @retval None
+  */
+void TIM2_user_Init(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+	
+	// Enable interrupt on TIM2 update
+	TIM2->DIER |= 0x1;
+	
+	// Divide TIM2 clock to get 1kHz
+	TIM2->PSC = SystemCoreClock/1000 - 1;
+	
+	// Set TIM2 reset at count=10; together with previous steps, triggers interrupt at 1Hz
+	TIM2->ARR = 10;
+	
+	// Enable TIM2
+	TIM2->CR1 |= 0x1;
+	
+	// Enable TIM2's interrupt in the NVIC
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_SetPriority(TIM2_IRQn, 0);
+}
+
+
+/**
+  * @brief  Initializes TIM3 to fire an interrupt at a certain interval.
+  * @param  None
+  * @retval None
+  */
+void TIM3_user_Init(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
+	
+	// Enable interrupt on TIM3 update
+	TIM3->DIER |= 0x1;
+	
+	// Divide TIM3 clock to get 1kHz
+	TIM3->PSC = SystemCoreClock/1000 - 1;
+	
+	// Set TIM3 reset at count=100; together with previous steps, triggers interrupt at 10Hz
+	TIM3->ARR = 10;
+	
+	// Enable TIM3
+	TIM3->CR1 |= 0x1;
+	
+	// Enable TIM3's interrupt in the NVIC
+	NVIC_EnableIRQ(TIM3_IRQn);
+	NVIC_SetPriority(TIM3_IRQn, 0);
 }
 
 
@@ -232,9 +377,7 @@ void ProcessSensors(void)
     return;
   }
 	
-	writeString("t: ");
-	writeChar(pos);
-	writeString("\r\n");
+	Touch_Sensor_Position = pos;
  
   LED3_OFF;
   LED4_OFF;
@@ -263,17 +406,65 @@ void ProcessSensors(void)
 }
 
 
-/** Write a string over USART_1
+/** Retrieves Y(pitch) and Z(yaw) status from the gyro.
 */
-void writeString(char *str) {
-	while (*str) {
-		writeChar(*str); str++;
+void PollGyro() {
+	// Read status from Y,Z registers
+	{	
+		// Write register address to I2C
+		I2C2->CR2 |= (0x6B << 1); I2C2->CR2 &= ~(0x28);
+		I2C2->CR2 |= 0x00010000; I2C2->CR2 &= 0xFF01FFFF;
+		I2C2->CR2 &= ~0x0400;
+		I2C2->CR2 |= 0x2000;
+		
+		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		
+		// Write the address of the gyro's Y-low register
+		I2C2->TXDR = 0xAA;
+		
+		while (!(I2C2->ISR & I2C_ISR_TC)) {}
+		
+		// RESTART, Read from the I2C
+		I2C2->CR2 |= (0x6B << 1); I2C2->CR2 &= ~(0x28);
+		I2C2->CR2 |= 0x00040000; I2C2->CR2 &= 0xFF04FFFF;
+		I2C2->CR2 |= 0x0400;
+		I2C2->CR2 |= 0x2000;
+			
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+			
+		Gyro_Y = I2C2->RXDR;
+			
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+			
+		Gyro_Y = Gyro_Y | ((0xFFFF & I2C2->RXDR) << 8);
+			
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+			
+		Gyro_Z = I2C2->RXDR;
+			
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+			
+		Gyro_Z = Gyro_Z | ((0xFFFF & I2C2->RXDR) << 8);
+		
+		while (!(I2C2->ISR & I2C_ISR_TC)) {}
+			
+		// End the transfer (set STOP bit)
+		I2C2->CR2 |= 0x4000;
 	}
 }
 
-/** Write a single character over USART_1
+
+/** Write a string over USART1
 */
-void writeChar(char ch) {
+void USART1WriteString(char *str) {
+	while (*str) {
+		USART1WriteChar(*str); str++;
+	}
+}
+
+/** Write a single character over USART1
+*/
+void USART1WriteChar(char ch) {
 	// Wait for transmit register to be empty
 	while ((USART1->ISR & 0x80) != 0x80) {}
 		
