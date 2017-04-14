@@ -40,7 +40,8 @@
 
 void Init_Std_GPIOs(void);
 void User_Button_Init(void);
-void USART_user_Init(void);
+void USART1_user_Init(void);
+void TIM2_user_Init(void);
 void ProcessSensors(void);
 void SystickDelay(__IO uint32_t nTime);
 
@@ -50,6 +51,7 @@ void writeChar(char ch);
 /* Global variables ----------------------------------------------------------*/
 
 __IO uint32_t Gv_SystickCounter;
+__IO uint8_t Touch_Sensor_Position;
 
 
 /**
@@ -91,7 +93,13 @@ int main(void)
   // Init USART
   //============================================================================  
 
-	USART_user_Init();
+	USART1_user_Init();
+	
+	//============================================================================
+  // Init TIM2
+  //============================================================================  
+
+	TIM2_user_Init();
 
   //============================================================================
   // Main loop
@@ -183,13 +191,13 @@ void User_Button_Init(void)
 
 
 /**
-  * @brief  Initializes the USART
+  * @brief  Initializes USART1 (uses PA9,PA10)
   * @param  None
   * @retval None
   */
-void USART_user_Init()
+void USART1_user_Init()
 {
-	RCC->APB2ENR |= (RCC_APB2ENR_USART1EN);
+	RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
 	
 	// Set PA9/10 to alternate function mode
 	GPIOA->MODER |= 0x280000; GPIOA->MODER &= ~0x140000;
@@ -204,7 +212,7 @@ void USART_user_Init()
 		USART1->BRR = SystemCoreClock/115200;
 		
 		// Enable Transmitter and Receiver
-		USART1->CR1 |= 0XC;
+		USART1->CR1 |= 0xC;
 		
 		// Enable RXNE interrupt in USART1 and NVIC
 		//USART1->CR1 |= 0x20;
@@ -214,6 +222,33 @@ void USART_user_Init()
 		// LAST, enable the USART itself
 		USART1->CR1 |= 0x1;
 	}
+}
+
+
+/**
+  * @brief  Initializes TIM2 to fire an interrupt at certain interval.
+  * @param  None
+  * @retval None
+  */
+void TIM2_user_Init(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+	
+	// Enable interrupt on TIM2 update
+	TIM2->DIER |= 0x1;
+	
+	// Divide TIM2 clock to get 1kHz
+	TIM2->PSC = SystemCoreClock/1000 - 1;
+	
+	// Set TIM2 reset at count=10; together with previous steps, triggers interrupt at 1Hz
+	TIM2->ARR = 10;
+	
+	// Enable TIM2
+	TIM2->CR1 |= 0x1;
+	
+	// Enable TIM2's interrupt in the NVIC
+	NVIC_EnableIRQ(TIM2_IRQn);
+	NVIC_SetPriority(TIM2_IRQn, 1);
 }
 
 
@@ -232,9 +267,7 @@ void ProcessSensors(void)
     return;
   }
 	
-	writeString("t: ");
-	writeChar(pos);
-	writeString("\r\n");
+	Touch_Sensor_Position = pos;
  
   LED3_OFF;
   LED4_OFF;
