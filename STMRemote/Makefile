@@ -34,53 +34,55 @@ PROJECT        = cameraarm
  
 # List C source files here
 
-SRC  = ./STMRemote/src/main.c
-SRC += ./STMRemote/src/stm32f0xx_it.c
-SRC += ./STMRemote/src/system_stm32f0xx.c
-SRC += ./STMRemote/src/stmCriticalSection.c
-SRC += ./STMRemote/src/tsl_user.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_can.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_cec.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_comp.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_crc.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_crs.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_dbgmcu.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_dma.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_i2c.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_iwdg.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_pwr.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rtc.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_syscfg.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_wwdg.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_acq.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_filter.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_dxs.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_ecs.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_globals.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_linrot.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_object.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_time.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_time_stm32f0xx.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_touchkey.c
-SRC += ./STMRemote/Drivers/STMTouch_Driver/src/tsl_acq_stm32f0xx.c
-SRC += ./STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_dac.c
+PERIPHS = ./Drivers/STM32F0xx_StdPeriph_Driver
+TOUCH = ./Drivers/STMTouch_Driver
+
+SRC  = ./src/main.c
+SRC += ./src/stm32f0xx_it.c
+SRC += ./src/system_stm32f0xx.c
+SRC += ./src/stmCriticalSection.c
+SRC += ./src/tsl_user.c
+#SRC += $(PERIPHS)/src/stm32f0xx_adc.c
+#SRC += $(PERIPHS)/src/stm32f0xx_can.c
+#SRC += $(PERIPHS)/src/stm32f0xx_cec.c
+#SRC += $(PERIPHS)/src/stm32f0xx_comp.c
+SRC += $(PERIPHS)/src/stm32f0xx_crc.c
+SRC += $(PERIPHS)/src/stm32f0xx_crs.c
+#SRC += $(PERIPHS)/src/stm32f0xx_dac.c
+SRC += $(PERIPHS)/src/stm32f0xx_dbgmcu.c
+SRC += $(PERIPHS)/src/stm32f0xx_dma.c
+SRC += $(PERIPHS)/src/stm32f0xx_exti.c
+SRC += $(PERIPHS)/src/stm32f0xx_flash.c
+SRC += $(PERIPHS)/src/stm32f0xx_gpio.c
+SRC += $(PERIPHS)/src/stm32f0xx_i2c.c
+#SRC += $(PERIPHS)/src/stm32f0xx_iwdg.c
+#SRC += $(PERIPHS)/src/stm32f0xx_misc.c
+#SRC += $(PERIPHS)/src/stm32f0xx_pwr.c
+SRC += $(PERIPHS)/src/stm32f0xx_rcc.c
+#SRC += $(PERIPHS)/src/stm32f0xx_rtc.c
+#SRC += $(PERIPHS)/src/stm32f0xx_spi.c
+SRC += $(PERIPHS)/src/stm32f0xx_syscfg.c
+#SRC += $(PERIPHS)/src/stm32f0xx_tim.c
+SRC += $(PERIPHS)/src/stm32f0xx_usart.c
+#SRC += $(PERIPHS)/src/stm32f0xx_wwdg.c
+SRC += $(TOUCH)/src/tsl_acq.c
+SRC += $(TOUCH)/src/tsl_filter.c
+SRC += $(TOUCH)/src/tsl.c
+SRC += $(TOUCH)/src/tsl_dxs.c
+SRC += $(TOUCH)/src/tsl_ecs.c
+SRC += $(TOUCH)/src/tsl_globals.c
+SRC += $(TOUCH)/src/tsl_linrot.c
+SRC += $(TOUCH)/src/tsl_object.c
+SRC += $(TOUCH)/src/tsl_time.c
+SRC += $(TOUCH)/src/tsl_time_stm32f0xx.c
+SRC += $(TOUCH)/src/tsl_touchkey.c
+SRC += $(TOUCH)/src/tsl_acq_stm32f0xx.c
 
 # List assembly startup source file here
-STARTUP = ./STMRemote/startup/startup_stm32f0xx.s
+STARTUP = ./startup/startup_stm32f0xx.s
  
 # List all include directories here
-ABSPATH = .#~/EmbeddedArm/RCCameraArm
-INCDIRS = $(ABSPATH)/STMRemote/inc $(ABSPATH)/STMRemote/Drivers/CMSIS/Include $(ABSPATH)/STMRemote/Drivers/CMSIS/Device/ST/STM32F0xx/Include $(ABSPATH)/STMRemote/MDK-ARM/RTE $(ABSPATH)/STMRemote/Drivers/STM32F0xx_StdPeriph_Driver/inc $(ABSPATH)/STMRemote/Drivers/STMTouch_Driver/inc 
+INCDIRS = ./inc ./Drivers/CMSIS/Include ./Drivers/CMSIS/Device/ST/STM32F0xx/Include ./MDK-ARM/RTE $(PERIPHS)/inc $(TOUCH)/inc 
               
 # List the user directory to look for the libraries here
 LIBDIRS += 
@@ -93,7 +95,7 @@ OPT = -Os
  
 
 # Define linker script file here
-LINKER_SCRIPT = ./STMRemote/linker/stm32f0_linker.ld
+LINKER_SCRIPT = ./linker/stm32f0_linker.ld
 
  
 INCDIR  = $(patsubst %,-I%, $(INCDIRS))
@@ -137,23 +139,13 @@ all: $(OBJS) $(PROJECT).elf  $(PROJECT).hex $(PROJECT).bin
 flash_openocd: $(PROJECT).bin
 	openocd -s ~/EmbeddedArm/openocd-bin/share/openocd/scripts/ -f interface/stlink-v2.cfg -f target/stm32f0x_stlink.cfg -c "init" -c "reset halt" -c "sleep 100" -c "wait_halt 2" -c "flash write_image erase $(PROJECT).bin 0x08000000" -c "sleep 100" -c "verify_image $(PROJECT).bin 0x08000000" -c "sleep 100" -c "reset run" -c shutdown
 
-flash_stlink: $(PROJECT).bin
-	st-flash write $(PROJECT).bin 0x8000000
-
 erase_openocd:
 	openocd -s ~/EmbeddedArm/openocd-bin/share/openocd/scripts/ -f interface/stlink-v2.cfg -f target/stm32f0x_stlink.cfg -c "init" -c "reset halt" -c "sleep 100" -c "stm32f1x mass_erase 0" -c "sleep 100" -c shutdown 
-
-erase_stlink:
-	st-flash erase
 
 debug_openocd: $(PROJECT).elf flash_openocd
 	xterm -e openocd -s ~/EmbeddedArm/openocd-bin/share/openocd/scripts/ -f interface/stlink-v2.cfg -f target/stm32f0x_stlink.cfg -c "init" -c "halt" -c "reset halt" &
 	$(GDBTUI) --eval-command="target remote localhost:3333" $(PROJECT).elf 
 
-debug_stlink: $(PROJECT).elf
-	xterm -e st-util &
-	$(GDBTUI) --eval-command="target remote localhost:4242"  $(PROJECT).elf -ex 'load'
-		
 clean:
 	-rm -rf $(OBJS)
 	-rm -rf $(PROJECT).elf
