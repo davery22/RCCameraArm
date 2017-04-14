@@ -3,7 +3,7 @@
 <title>Static Call Graph - [STM32F072B\STM32F072B.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F072B\STM32F072B.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Thu Apr 13 18:56:40 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060300: Last Updated: Thu Apr 13 21:02:08 2017
 <BR><P>
 <H3>Maximum Stack Usage =         80 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -50,7 +50,7 @@ Function Pointers
  <LI><a href="#[13]">TIM1_BRK_UP_TRG_COM_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
  <LI><a href="#[14]">TIM1_CC_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
  <LI><a href="#[15]">TIM2_IRQHandler</a> from stm32f0xx_it.o(i.TIM2_IRQHandler) referenced from startup_stm32f072.o(RESET)
- <LI><a href="#[16]">TIM3_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
+ <LI><a href="#[16]">TIM3_IRQHandler</a> from stm32f0xx_it.o(i.TIM3_IRQHandler) referenced from startup_stm32f072.o(RESET)
  <LI><a href="#[17]">TIM6_DAC_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
  <LI><a href="#[18]">TIM7_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
  <LI><a href="#[e]">TSC_IRQHandler</a> from startup_stm32f072.o(.text) referenced from startup_stm32f072.o(RESET)
@@ -82,7 +82,7 @@ Global Symbols
 <P><STRONG><a name="[28]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(.text)
 </UL>
-<P><STRONG><a name="[6b]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[6f]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[38]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -92,15 +92,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[6c]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[70]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[6d]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[71]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[6e]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[72]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[6f]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[73]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[70]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[74]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f072.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
@@ -172,9 +172,6 @@ Global Symbols
 <P><STRONG><a name="[14]"></a>TIM1_CC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f072.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[16]"></a>TIM3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f072.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
-</UL>
 <P><STRONG><a name="[17]"></a>TIM6_DAC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f072.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
@@ -199,15 +196,16 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f072.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[71]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<P><STRONG><a name="[75]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
 
-<P><STRONG><a name="[44]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
+<P><STRONG><a name="[46]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = __aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_Init
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
-<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_user_Init
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
+<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_Init
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_user_Init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_user_Init
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_CalcPos
 </UL>
 
@@ -217,16 +215,16 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[72]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[76]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
 <P><STRONG><a name="[b]"></a>EXTI0_1_IRQHandler</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f0xx_it.o(i.EXTI0_1_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[3c]"></a>GPIO_Init</STRONG> (Thumb, 112 bytes, Stack size 20 bytes, stm32f0xx_gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[3e]"></a>GPIO_Init</STRONG> (Thumb, 112 bytes, Stack size 20 bytes, stm32f0xx_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Std_GPIOs
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_InitGPIOs
+<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Std_GPIOs
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_InitGPIOs
 </UL>
 
 <P><STRONG><a name="[2]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f0xx_it.o(i.HardFault_Handler))
@@ -236,19 +234,33 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[3b]"></a>Init_Std_GPIOs</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, main.o(i.Init_Std_GPIOs))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Init_Std_GPIOs &rArr; GPIO_Init
+<P><STRONG><a name="[3b]"></a>I2C2_user_Init</STRONG> (Thumb, 152 bytes, Stack size 4 bytes, main.o(i.I2C2_user_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = I2C2_user_Init &rArr; InitializeGyro
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitializeGyro
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3d]"></a>Init_Std_GPIOs</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, main.o(i.Init_Std_GPIOs))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Init_Std_GPIOs &rArr; GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3c]"></a>InitializeGyro</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, main.o(i.InitializeGyro))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = InitializeGyro
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C2_user_Init
 </UL>
 
 <P><STRONG><a name="[32]"></a>MyLinRots_ErrorStateProcess</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, main.o(i.MyLinRots_ErrorStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = MyLinRots_ErrorStateProcess &rArr; TSL_linrot_SetStateOff &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystickDelay
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateOff
+<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystickDelay
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateOff
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
@@ -261,189 +273,211 @@ Global Symbols
 <P><STRONG><a name="[4]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f0xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[6a]"></a>ProcessSensors</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, main.o(i.ProcessSensors))
+<P><STRONG><a name="[48]"></a>PollGyro</STRONG> (Thumb, 224 bytes, Stack size 20 bytes, main.o(i.PollGyro))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = PollGyro
+</UL>
+<BR>[Called By]<UL><LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
+</UL>
+
+<P><STRONG><a name="[6e]"></a>ProcessSensors</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, main.o(i.ProcessSensors))
 <BR><BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[3]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f0xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[4f]"></a>SoftDelay</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.SoftDelay))
-<BR><BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankStartAcq
+<P><STRONG><a name="[53]"></a>SoftDelay</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.SoftDelay))
+<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankStartAcq
 </UL>
 
 <P><STRONG><a name="[5]"></a>SysTick_Handler</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, stm32f0xx_it.o(i.SysTick_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SysTick_Handler
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_ProcessIT
+<BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_ProcessIT
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
 <P><STRONG><a name="[27]"></a>SystemInit</STRONG> (Thumb, 84 bytes, Stack size 8 bytes, system_stm32f0xx.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SystemInit &rArr; SetSysClock
 </UL>
-<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(.text)
 </UL>
-<P><STRONG><a name="[3e]"></a>SystickDelay</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.SystickDelay))
+<P><STRONG><a name="[40]"></a>SystickDelay</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.SystickDelay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SystickDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyLinRots_ErrorStateProcess
 </UL>
 
-<P><STRONG><a name="[15]"></a>TIM2_IRQHandler</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, stm32f0xx_it.o(i.TIM2_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TIM2_IRQHandler &rArr; writeString
+<P><STRONG><a name="[15]"></a>TIM2_IRQHandler</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, stm32f0xx_it.o(i.TIM2_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TIM2_IRQHandler &rArr; USART1WriteString
 </UL>
-<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeString
-<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeChar
+<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1WriteString
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1WriteChar
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[43]"></a>TIM2_user_Init</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, main.o(i.TIM2_user_Init))
+<P><STRONG><a name="[45]"></a>TIM2_user_Init</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, main.o(i.TIM2_user_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = TIM2_user_Init &rArr; __aeabi_uidivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[46]"></a>TSL_Init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, tsl.o(i.TSL_Init))
+<P><STRONG><a name="[16]"></a>TIM3_IRQHandler</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, stm32f0xx_it.o(i.TIM3_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = TIM3_IRQHandler &rArr; PollGyro
+</UL>
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PollGyro
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
+</UL>
+<P><STRONG><a name="[49]"></a>TIM3_user_Init</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, main.o(i.TIM3_user_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = TIM3_user_Init &rArr; __aeabi_uidivmod
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[4a]"></a>TSL_Init</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, tsl.o(i.TSL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = TSL_Init &rArr; TSL_acq_Init &rArr; TSL_acq_InitGPIOs &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_Init
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_Init
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
 </UL>
 
-<P><STRONG><a name="[64]"></a>TSL_acq_BankConfig</STRONG> (Thumb, 86 bytes, Stack size 20 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankConfig))
+<P><STRONG><a name="[68]"></a>TSL_acq_BankConfig</STRONG> (Thumb, 86 bytes, Stack size 20 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TSL_acq_BankConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[49]"></a>TSL_acq_BankGetResult</STRONG> (Thumb, 284 bytes, Stack size 56 bytes, tsl_acq.o(i.TSL_acq_BankGetResult))
+<P><STRONG><a name="[4d]"></a>TSL_acq_BankGetResult</STRONG> (Thumb, 284 bytes, Stack size 56 bytes, tsl_acq.o(i.TSL_acq_BankGetResult))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = TSL_acq_BankGetResult
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_UseFilter
-<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_GetMeas
-<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_ComputeDelta
-<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_CheckNoise
+<BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_UseFilter
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_GetMeas
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_ComputeDelta
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_CheckNoise
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[4e]"></a>TSL_acq_BankStartAcq</STRONG> (Thumb, 38 bytes, Stack size 4 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankStartAcq))
+<P><STRONG><a name="[52]"></a>TSL_acq_BankStartAcq</STRONG> (Thumb, 38 bytes, Stack size 4 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankStartAcq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = TSL_acq_BankStartAcq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoftDelay
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoftDelay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
-</UL>
-
-<P><STRONG><a name="[65]"></a>TSL_acq_BankWaitEOC</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankWaitEOC))
-<BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[4d]"></a>TSL_acq_CheckNoise</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_CheckNoise))
-<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+<P><STRONG><a name="[69]"></a>TSL_acq_BankWaitEOC</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_BankWaitEOC))
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[4c]"></a>TSL_acq_ComputeDelta</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_ComputeDelta))
-<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+<P><STRONG><a name="[51]"></a>TSL_acq_CheckNoise</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_CheckNoise))
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
 </UL>
 
-<P><STRONG><a name="[56]"></a>TSL_acq_ComputeMeas</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_ComputeMeas))
-<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
+<P><STRONG><a name="[50]"></a>TSL_acq_ComputeDelta</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_ComputeDelta))
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
 </UL>
 
-<P><STRONG><a name="[4a]"></a>TSL_acq_GetMeas</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_GetMeas))
-<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+<P><STRONG><a name="[5a]"></a>TSL_acq_ComputeMeas</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_ComputeMeas))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
 </UL>
 
-<P><STRONG><a name="[48]"></a>TSL_acq_Init</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_Init))
+<P><STRONG><a name="[4e]"></a>TSL_acq_GetMeas</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_GetMeas))
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+</UL>
+
+<P><STRONG><a name="[4c]"></a>TSL_acq_Init</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = TSL_acq_Init &rArr; TSL_acq_InitGPIOs &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_InitGPIOs
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_InitGPIOs
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
+<BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
 </UL>
 
-<P><STRONG><a name="[50]"></a>TSL_acq_InitGPIOs</STRONG> (Thumb, 146 bytes, Stack size 32 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_InitGPIOs))
+<P><STRONG><a name="[54]"></a>TSL_acq_InitGPIOs</STRONG> (Thumb, 146 bytes, Stack size 32 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_InitGPIOs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = TSL_acq_InitGPIOs &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_Init
 </UL>
 
-<P><STRONG><a name="[59]"></a>TSL_acq_TestFirstReferenceIsValid</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_TestFirstReferenceIsValid))
+<P><STRONG><a name="[5d]"></a>TSL_acq_TestFirstReferenceIsValid</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_TestFirstReferenceIsValid))
 <BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_CalibrationStateProcess
 </UL>
 
-<P><STRONG><a name="[57]"></a>TSL_acq_TestReferenceOutOfRange</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_TestReferenceOutOfRange))
-<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
+<P><STRONG><a name="[5b]"></a>TSL_acq_TestReferenceOutOfRange</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_TestReferenceOutOfRange))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
 </UL>
 
-<P><STRONG><a name="[4b]"></a>TSL_acq_UseFilter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_UseFilter))
-<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+<P><STRONG><a name="[4f]"></a>TSL_acq_UseFilter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, tsl_acq_stm32f0xx.o(i.TSL_acq_UseFilter))
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
 </UL>
 
-<P><STRONG><a name="[66]"></a>TSL_dxs_FirstObj</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, tsl_dxs.o(i.TSL_dxs_FirstObj))
-<BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<P><STRONG><a name="[6a]"></a>TSL_dxs_FirstObj</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, tsl_dxs.o(i.TSL_dxs_FirstObj))
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[51]"></a>TSL_ecs_CalcK</STRONG> (Thumb, 150 bytes, Stack size 48 bytes, tsl_ecs.o(i.TSL_ecs_CalcK))
+<P><STRONG><a name="[55]"></a>TSL_ecs_CalcK</STRONG> (Thumb, 150 bytes, Stack size 48 bytes, tsl_ecs.o(i.TSL_ecs_CalcK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = TSL_ecs_CalcK
 </UL>
-<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
 </UL>
-<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
+<BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
 </UL>
 
-<P><STRONG><a name="[53]"></a>TSL_ecs_Process</STRONG> (Thumb, 120 bytes, Stack size 16 bytes, tsl_ecs.o(i.TSL_ecs_Process))
+<P><STRONG><a name="[57]"></a>TSL_ecs_Process</STRONG> (Thumb, 120 bytes, Stack size 16 bytes, tsl_ecs.o(i.TSL_ecs_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = TSL_ecs_Process &rArr; TSL_ecs_CalcK
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_CheckDelay_ms
-<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_CalcK
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_CheckDelay_ms
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_CalcK
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[55]"></a>TSL_ecs_ProcessK</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, tsl_ecs.o(i.TSL_ecs_ProcessK))
+<P><STRONG><a name="[59]"></a>TSL_ecs_ProcessK</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, tsl_ecs.o(i.TSL_ecs_ProcessK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = TSL_ecs_ProcessK
 </UL>
-<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_ComputeMeas
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_TestReferenceOutOfRange
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_ComputeMeas
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_TestReferenceOutOfRange
 </UL>
-<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
+<BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
 </UL>
 
 <P><STRONG><a name="[37]"></a>TSL_linrot_CalcPos</STRONG> (Thumb, 644 bytes, Stack size 24 bytes, tsl_linrot.o(i.TSL_linrot_CalcPos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = TSL_linrot_CalcPos &rArr; __aeabi_uidivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
 <P><STRONG><a name="[2a]"></a>TSL_linrot_CalibrationStateProcess</STRONG> (Thumb, 186 bytes, Stack size 24 bytes, tsl_linrot.o(i.TSL_linrot_CalibrationStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TSL_linrot_CalibrationStateProcess
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_TestFirstReferenceIsValid
+<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_TestFirstReferenceIsValid
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
 <P><STRONG><a name="[2b]"></a>TSL_linrot_DebCalibrationStateProcess</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_DebCalibrationStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = TSL_linrot_DebCalibrationStateProcess &rArr; TSL_linrot_SetStateCalibration &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaBelowEquMinus
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaBelowEquMinus
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateCalibration
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
@@ -451,16 +485,16 @@ Global Symbols
 <P><STRONG><a name="[30]"></a>TSL_linrot_DebDetectStateProcess</STRONG> (Thumb, 68 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_DebDetectStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TSL_linrot_DebDetectStateProcess &rArr; TSL_linrot_ProcessCh_One_DeltaAboveEqu
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAboveEqu
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAboveEqu
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
 <P><STRONG><a name="[33]"></a>TSL_linrot_DebErrorStateProcess</STRONG> (Thumb, 102 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_DebErrorStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TSL_linrot_DebErrorStateProcess &rArr; TSL_linrot_SetStateCalibration &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_GetStateMask
+<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_GetStateMask
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateCalibration
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
@@ -468,28 +502,28 @@ Global Symbols
 <P><STRONG><a name="[2d]"></a>TSL_linrot_DebReleaseDetectStateProcess</STRONG> (Thumb, 68 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_DebReleaseDetectStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TSL_linrot_DebReleaseDetectStateProcess &rArr; TSL_linrot_ProcessCh_One_DeltaAbove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
 <P><STRONG><a name="[2e]"></a>TSL_linrot_DebReleaseTouchStateProcess</STRONG> (Thumb, 68 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_DebReleaseTouchStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TSL_linrot_DebReleaseTouchStateProcess &rArr; TSL_linrot_ProcessCh_One_DeltaAbove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
 <P><STRONG><a name="[2f]"></a>TSL_linrot_DetectStateProcess</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_DetectStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TSL_linrot_DetectStateProcess &rArr; TSL_linrot_ProcessCh_One_DeltaAbove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
-<P><STRONG><a name="[5c]"></a>TSL_linrot_GetStateMask</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, tsl_linrot.o(i.TSL_linrot_GetStateMask))
+<P><STRONG><a name="[60]"></a>TSL_linrot_GetStateMask</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, tsl_linrot.o(i.TSL_linrot_GetStateMask))
 <BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_DebErrorStateProcess
 </UL>
 
@@ -503,24 +537,24 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>TSL_linrot_Process</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, tsl_linrot.o(i.TSL_linrot_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = TSL_linrot_Process &rArr; TSL_linrot_ProcessCh_One_DataReady
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DataReady
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DataReady
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
-<P><STRONG><a name="[60]"></a>TSL_linrot_ProcessCh_All_ClearRef</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_All_ClearRef))
+<P><STRONG><a name="[64]"></a>TSL_linrot_ProcessCh_All_ClearRef</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_All_ClearRef))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TSL_linrot_ProcessCh_All_ClearRef
 </UL>
 <BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateCalibration
 </UL>
 
-<P><STRONG><a name="[5f]"></a>TSL_linrot_ProcessCh_All_SetStatus</STRONG> (Thumb, 42 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_All_SetStatus))
+<P><STRONG><a name="[63]"></a>TSL_linrot_ProcessCh_All_SetStatus</STRONG> (Thumb, 42 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_All_SetStatus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateOff
+<BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateOff
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateCalibration
 </UL>
 
-<P><STRONG><a name="[58]"></a>TSL_linrot_ProcessCh_One_AcqStatusError</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_AcqStatusError))
+<P><STRONG><a name="[5c]"></a>TSL_linrot_ProcessCh_One_AcqStatusError</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_AcqStatusError))
 <BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_TouchStateProcess
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ReleaseStateProcess
 <LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_DetectStateProcess
@@ -532,13 +566,13 @@ Global Symbols
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_CalibrationStateProcess
 </UL>
 
-<P><STRONG><a name="[5e]"></a>TSL_linrot_ProcessCh_One_DataReady</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DataReady))
+<P><STRONG><a name="[62]"></a>TSL_linrot_ProcessCh_One_DataReady</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DataReady))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TSL_linrot_ProcessCh_One_DataReady
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_Process
 </UL>
 
-<P><STRONG><a name="[5d]"></a>TSL_linrot_ProcessCh_One_DeltaAbove</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaAbove))
+<P><STRONG><a name="[61]"></a>TSL_linrot_ProcessCh_One_DeltaAbove</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaAbove))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TSL_linrot_ProcessCh_One_DeltaAbove
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_TouchStateProcess
@@ -547,14 +581,14 @@ Global Symbols
 <LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_DebReleaseDetectStateProcess
 </UL>
 
-<P><STRONG><a name="[5b]"></a>TSL_linrot_ProcessCh_One_DeltaAboveEqu</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaAboveEqu))
+<P><STRONG><a name="[5f]"></a>TSL_linrot_ProcessCh_One_DeltaAboveEqu</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaAboveEqu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TSL_linrot_ProcessCh_One_DeltaAboveEqu
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ReleaseStateProcess
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_DebDetectStateProcess
 </UL>
 
-<P><STRONG><a name="[5a]"></a>TSL_linrot_ProcessCh_One_DeltaBelowEquMinus</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaBelowEquMinus))
+<P><STRONG><a name="[5e]"></a>TSL_linrot_ProcessCh_One_DeltaBelowEquMinus</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ProcessCh_One_DeltaBelowEquMinus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TSL_linrot_ProcessCh_One_DeltaBelowEquMinus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ReleaseStateProcess
@@ -564,9 +598,9 @@ Global Symbols
 <P><STRONG><a name="[2c]"></a>TSL_linrot_ReleaseStateProcess</STRONG> (Thumb, 126 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_ReleaseStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TSL_linrot_ReleaseStateProcess &rArr; TSL_linrot_SetStateCalibration &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaBelowEquMinus
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAboveEqu
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaBelowEquMinus
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAboveEqu
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_SetStateCalibration
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
@@ -574,8 +608,8 @@ Global Symbols
 <P><STRONG><a name="[29]"></a>TSL_linrot_SetStateCalibration</STRONG> (Thumb, 78 bytes, Stack size 12 bytes, tsl_linrot.o(i.TSL_linrot_SetStateCalibration))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TSL_linrot_SetStateCalibration &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_SetStatus
-<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_ClearRef
+<BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_SetStatus
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_ClearRef
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ReleaseStateProcess
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_Init
@@ -584,10 +618,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_ecs.o(i.TSL_ecs_ProcessK)
 </UL>
-<P><STRONG><a name="[3d]"></a>TSL_linrot_SetStateOff</STRONG> (Thumb, 32 bytes, Stack size 4 bytes, tsl_linrot.o(i.TSL_linrot_SetStateOff))
+<P><STRONG><a name="[3f]"></a>TSL_linrot_SetStateOff</STRONG> (Thumb, 32 bytes, Stack size 4 bytes, tsl_linrot.o(i.TSL_linrot_SetStateOff))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TSL_linrot_SetStateOff &rArr; TSL_linrot_ProcessCh_All_SetStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_SetStatus
+<BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_All_SetStatus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyLinRots_ErrorStateProcess
 </UL>
@@ -595,137 +629,140 @@ Global Symbols
 <P><STRONG><a name="[31]"></a>TSL_linrot_TouchStateProcess</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, tsl_linrot.o(i.TSL_linrot_TouchStateProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TSL_linrot_TouchStateProcess &rArr; TSL_linrot_ProcessCh_One_DeltaAbove
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_DeltaAbove
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_linrot_ProcessCh_One_AcqStatusError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> tsl_user.o(.constdata)
 </UL>
-<P><STRONG><a name="[61]"></a>TSL_obj_GroupInit</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, tsl_object.o(i.TSL_obj_GroupInit))
+<P><STRONG><a name="[65]"></a>TSL_obj_GroupInit</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, tsl_object.o(i.TSL_obj_GroupInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TSL_obj_GroupInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
 </UL>
-<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
 </UL>
 
-<P><STRONG><a name="[62]"></a>TSL_obj_GroupProcess</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, tsl_object.o(i.TSL_obj_GroupProcess))
+<P><STRONG><a name="[66]"></a>TSL_obj_GroupProcess</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, tsl_object.o(i.TSL_obj_GroupProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TSL_obj_GroupProcess
 </UL>
-<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_SetGlobalObj
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
-</UL>
-
-<P><STRONG><a name="[52]"></a>TSL_obj_SetGlobalObj</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, tsl_object.o(i.TSL_obj_SetGlobalObj))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupProcess
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupInit
-<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_CalcK
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
 </UL>
 
-<P><STRONG><a name="[54]"></a>TSL_tim_CheckDelay_ms</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, tsl_time.o(i.TSL_tim_CheckDelay_ms))
+<P><STRONG><a name="[56]"></a>TSL_obj_SetGlobalObj</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, tsl_object.o(i.TSL_obj_SetGlobalObj))
+<BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupProcess
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupInit
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_ProcessK
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_CalcK
+</UL>
+
+<P><STRONG><a name="[58]"></a>TSL_tim_CheckDelay_ms</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, tsl_time.o(i.TSL_tim_CheckDelay_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TSL_tim_CheckDelay_ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
 </UL>
 
-<P><STRONG><a name="[47]"></a>TSL_tim_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, tsl_time_stm32f0xx.o(i.TSL_tim_Init))
+<P><STRONG><a name="[4b]"></a>TSL_tim_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, tsl_time_stm32f0xx.o(i.TSL_tim_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TSL_tim_Init &rArr; __aeabi_uidivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
+<BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
 </UL>
 
-<P><STRONG><a name="[3f]"></a>TSL_tim_ProcessIT</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, tsl_time.o(i.TSL_tim_ProcessIT))
+<P><STRONG><a name="[41]"></a>TSL_tim_ProcessIT</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, tsl_time.o(i.TSL_tim_ProcessIT))
 <BR><BR>[Called By]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[63]"></a>TSL_user_Action</STRONG> (Thumb, 130 bytes, Stack size 16 bytes, tsl_user.o(i.TSL_user_Action))
+<P><STRONG><a name="[67]"></a>TSL_user_Action</STRONG> (Thumb, 130 bytes, Stack size 16 bytes, tsl_user.o(i.TSL_user_Action))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = TSL_user_Action &rArr; TSL_ecs_Process &rArr; TSL_ecs_CalcK
 </UL>
-<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankWaitEOC
-<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankStartAcq
-<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankConfig
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupProcess
-<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_CheckDelay_ms
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_dxs_FirstObj
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankWaitEOC
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankStartAcq
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankConfig
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_acq_BankGetResult
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupProcess
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_tim_CheckDelay_ms
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_ecs_Process
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_dxs_FirstObj
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[67]"></a>TSL_user_Init</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, tsl_user.o(i.TSL_user_Init))
+<P><STRONG><a name="[6b]"></a>TSL_user_Init</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, tsl_user.o(i.TSL_user_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = TSL_user_Init &rArr; TSL_Init &rArr; TSL_acq_Init &rArr; TSL_acq_InitGPIOs &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
-<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupInit
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_Init
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_obj_GroupInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[68]"></a>USART1_user_Init</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, main.o(i.USART1_user_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = USART1_user_Init &rArr; __aeabi_uidivmod
-</UL>
-<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-</UL>
-<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[69]"></a>User_Button_Init</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, main.o(i.User_Button_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = User_Button_Init
-</UL>
-<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
-</UL>
-<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[73]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
-
-<P><STRONG><a name="[74]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
-
-<P><STRONG><a name="[75]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
-
-<P><STRONG><a name="[26]"></a>main</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = main &rArr; TSL_user_Action &rArr; TSL_ecs_Process &rArr; TSL_ecs_CalcK
-</UL>
-<BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
-<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;User_Button_Init
-<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_user_Init
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSensors
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Std_GPIOs
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
-</UL>
-<P><STRONG><a name="[41]"></a>writeChar</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main.o(i.writeChar))
+<P><STRONG><a name="[43]"></a>USART1WriteChar</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, main.o(i.USART1WriteChar))
 <BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeString
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1WriteString
 </UL>
 
-<P><STRONG><a name="[42]"></a>writeString</STRONG> (Thumb, 20 bytes, Stack size 4 bytes, main.o(i.writeString))
-<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = writeString
+<P><STRONG><a name="[44]"></a>USART1WriteString</STRONG> (Thumb, 20 bytes, Stack size 4 bytes, main.o(i.USART1WriteString))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = USART1WriteString
 </UL>
-<BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writeChar
+<BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1WriteChar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
-<P>
+
+<P><STRONG><a name="[6c]"></a>USART1_user_Init</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, main.o(i.USART1_user_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = USART1_user_Init &rArr; __aeabi_uidivmod
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[6d]"></a>User_Button_Init</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, main.o(i.User_Button_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = User_Button_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[77]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+
+<P><STRONG><a name="[78]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+
+<P><STRONG><a name="[79]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+
+<P><STRONG><a name="[26]"></a>main</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = main &rArr; TSL_user_Action &rArr; TSL_ecs_Process &rArr; TSL_ecs_CalcK
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Init
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TSL_user_Action
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;User_Button_Init
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_user_Init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_user_Init
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSensors
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Std_GPIOs
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C2_user_Init
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
+</UL><P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[40]"></a>SetSysClock</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, system_stm32f0xx.o(i.SetSysClock))
+<P><STRONG><a name="[42]"></a>SetSysClock</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, system_stm32f0xx.o(i.SetSysClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SetSysClock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[45]"></a>NVIC_SetPriority</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, main.o(i.NVIC_SetPriority))
-<BR><BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;User_Button_Init
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
+<P><STRONG><a name="[47]"></a>NVIC_SetPriority</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, main.o(i.NVIC_SetPriority))
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;User_Button_Init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_user_Init
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_user_Init
 </UL>
 <P>
 <H3>
