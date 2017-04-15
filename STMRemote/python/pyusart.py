@@ -8,4 +8,3 @@ line = ser.readline()
 print(line)
 while True:
 	print(ser.readline())
-        time.sleep(0.01)

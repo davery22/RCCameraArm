@@ -174,7 +174,11 @@ void TIM2_IRQHandler(void)
 		USART1WriteChar('z');
 		USART1WriteChar((Gyro_Z >> 8));
 		USART1WriteChar((Gyro_Z & 0xFF));
+		#if defined (USE_LINUX)
+		USART1WriteString("\n");
+		#else
 		USART1WriteString("\r\n");
+		#endif
 	}
 }
 

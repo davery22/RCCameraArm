@@ -21,7 +21,7 @@ CCPREFIX = arm-none-eabi-
 CC   = $(CCPREFIX)gcc
 CP   = $(CCPREFIX)objcopy
 AS   = $(CCPREFIX)gcc -x assembler-with-cpp
-GDBTUI = $(CCPREFIX)gdbtui
+GDBTUI = $(CCPREFIX)gdb
 HEX  = $(CP) -O ihex
 BIN  = $(CP) -O binary -S
 MCU  = cortex-m0
@@ -46,23 +46,23 @@ SRC += ./src/tsl_user.c
 #SRC += $(PERIPHS)/src/stm32f0xx_can.c
 #SRC += $(PERIPHS)/src/stm32f0xx_cec.c
 #SRC += $(PERIPHS)/src/stm32f0xx_comp.c
-SRC += $(PERIPHS)/src/stm32f0xx_crc.c
-SRC += $(PERIPHS)/src/stm32f0xx_crs.c
+#SRC += $(PERIPHS)/src/stm32f0xx_crc.c
+#SRC += $(PERIPHS)/src/stm32f0xx_crs.c
 #SRC += $(PERIPHS)/src/stm32f0xx_dac.c
-SRC += $(PERIPHS)/src/stm32f0xx_dbgmcu.c
-SRC += $(PERIPHS)/src/stm32f0xx_dma.c
+#SRC += $(PERIPHS)/src/stm32f0xx_dbgmcu.c
+#SRC += $(PERIPHS)/src/stm32f0xx_dma.c
 SRC += $(PERIPHS)/src/stm32f0xx_exti.c
 SRC += $(PERIPHS)/src/stm32f0xx_flash.c
 SRC += $(PERIPHS)/src/stm32f0xx_gpio.c
 SRC += $(PERIPHS)/src/stm32f0xx_i2c.c
 #SRC += $(PERIPHS)/src/stm32f0xx_iwdg.c
-#SRC += $(PERIPHS)/src/stm32f0xx_misc.c
-#SRC += $(PERIPHS)/src/stm32f0xx_pwr.c
+SRC += $(PERIPHS)/src/stm32f0xx_misc.c
+SRC += $(PERIPHS)/src/stm32f0xx_pwr.c
 SRC += $(PERIPHS)/src/stm32f0xx_rcc.c
 #SRC += $(PERIPHS)/src/stm32f0xx_rtc.c
 #SRC += $(PERIPHS)/src/stm32f0xx_spi.c
 SRC += $(PERIPHS)/src/stm32f0xx_syscfg.c
-#SRC += $(PERIPHS)/src/stm32f0xx_tim.c
+SRC += $(PERIPHS)/src/stm32f0xx_tim.c
 SRC += $(PERIPHS)/src/stm32f0xx_usart.c
 #SRC += $(PERIPHS)/src/stm32f0xx_wwdg.c
 SRC += $(TOUCH)/src/tsl_acq.c
@@ -105,7 +105,7 @@ LIB     = $(patsubst %,-l%, $(LIBS))
 ##DEFS    = $(DDEFS) $(UDEFS) -DRUN_FROM_FLASH=0 -DVECT_TAB_SRAM
 
 ## run from Flash
-DEFS    = $(DDEFS) -DRUN_FROM_FLASH=1 -DUSE_STDPERIPH_DRIVER -DSTM32F0XX
+DEFS    = $(DDEFS) -DRUN_FROM_FLASH=1 -DUSE_STDPERIPH_DRIVER -DSTM32F0XX -DSTM32F072 -DSTM32F072xB -D_RTE_ -DUSE_LINUX
 
 OBJS  = $(STARTUP:.s=.o) $(SRC:.c=.o)
 MCFLAGS = -mcpu=$(MCU)
