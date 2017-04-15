@@ -58,6 +58,8 @@ __IO uint8_t Touch_Sensor_Position;
 __IO uint16_t Gyro_Y;
 __IO uint16_t Gyro_Z;
 
+uint16_t i2c_wait_count;
+
 
 /**
   * @brief  Main routine.
@@ -290,7 +292,7 @@ void InitializeGyro(void)
 		I2C2->CR2 &= ~0x0400;
 		I2C2->CR2 |= 0x2000;
 		
-		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}LED6_ON;
+		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
 		
 		// Write the address of the gyro's CR1 register
 		I2C2->TXDR = 0x20;
@@ -417,12 +419,14 @@ void PollGyro() {
 		I2C2->CR2 &= ~0x0400;
 		I2C2->CR2 |= 0x2000;
 		
-		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		while (!((I2C2->ISR & I2C_ISR_TXIS) ^ (I2C2->ISR & I2C_ISR_NACKF)) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 		
 		// Write the address of the gyro's Y-low register
 		I2C2->TXDR = 0xAA;
 		
-		while (!(I2C2->ISR & I2C_ISR_TC)) {}
+		while (!(I2C2->ISR & I2C_ISR_TC) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 		
 		// RESTART, Read from the I2C
 		I2C2->CR2 |= (0x6B << 1); I2C2->CR2 &= ~(0x28);
@@ -430,23 +434,28 @@ void PollGyro() {
 		I2C2->CR2 |= 0x0400;
 		I2C2->CR2 |= 0x2000;
 			
-		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF)) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 			
 		Gyro_Y = I2C2->RXDR;
 			
-		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF)) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 			
 		Gyro_Y = Gyro_Y | ((0xFFFF & I2C2->RXDR) << 8);
 			
-		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF)) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 			
 		Gyro_Z = I2C2->RXDR;
 			
-		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF))) {}
+		while (!((I2C2->ISR & I2C_ISR_RXNE) ^ (I2C2->ISR & I2C_ISR_NACKF)) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 			
 		Gyro_Z = Gyro_Z | ((0xFFFF & I2C2->RXDR) << 8);
 		
-		while (!(I2C2->ISR & I2C_ISR_TC)) {}
+		while (!(I2C2->ISR & I2C_ISR_TC) && (++i2c_wait_count)) {}
+    if (!i2c_wait_count) { I2C2->CR2 |= 0x4000; i2c_wait_count = 0; return; } i2c_wait_count = 0;
 			
 		// End the transfer (set STOP bit)
 		I2C2->CR2 |= 0x4000;
