@@ -58,7 +58,7 @@ __IO uint8_t Touch_Sensor_Position;
 __IO uint16_t Gyro_Y;
 __IO uint16_t Gyro_Z;
 
-uint16_t i2c_wait_count;
+__IO uint16_t i2c_wait_count;
 
 
 /**
@@ -118,7 +118,7 @@ int main(void)
   //============================================================================
   // Main loop
   //============================================================================
-
+	
   for (;;)
   {
     // Execute STMTouch Driver state machine
@@ -328,12 +328,12 @@ void TIM2_user_Init(void)
 	// Set TIM2 reset at count=10; together with previous steps, triggers interrupt at 1Hz
 	TIM2->ARR = 10;
 	
-	// Enable TIM2
-	TIM2->CR1 |= 0x1;
-	
 	// Enable TIM2's interrupt in the NVIC
 	NVIC_EnableIRQ(TIM2_IRQn);
 	NVIC_SetPriority(TIM2_IRQn, 0);
+	
+	// Enable TIM2
+	TIM2->CR1 |= 0x1;
 }
 
 
@@ -355,12 +355,12 @@ void TIM3_user_Init(void)
 	// Set TIM3 reset at count=100; together with previous steps, triggers interrupt at 10Hz
 	TIM3->ARR = 10;
 	
-	// Enable TIM3
-	TIM3->CR1 |= 0x1;
-	
 	// Enable TIM3's interrupt in the NVIC
 	NVIC_EnableIRQ(TIM3_IRQn);
 	NVIC_SetPriority(TIM3_IRQn, 0);
+	
+	// Enable TIM3
+	TIM3->CR1 |= 0x1;
 }
 
 

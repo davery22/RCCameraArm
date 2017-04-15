@@ -1,0 +1,25 @@
+--cpu Cortex-M0
+"stmmotorcontroller\main.o"
+"stmmotorcontroller\stm32f0xx_it.o"
+"stmmotorcontroller\stm32f0xx_hal_msp.o"
+"stmmotorcontroller\motor.o"
+"stmmotorcontroller\stm32f0xx_hal_i2c_ex.o"
+"stmmotorcontroller\stm32f0xx_hal_rcc_ex.o"
+"stmmotorcontroller\stm32f0xx_hal_tim_ex.o"
+"stmmotorcontroller\stm32f0xx_hal_flash_ex.o"
+"stmmotorcontroller\stm32f0xx_hal_rcc.o"
+"stmmotorcontroller\stm32f0xx_hal_dma.o"
+"stmmotorcontroller\stm32f0xx_hal_pwr.o"
+"stmmotorcontroller\stm32f0xx_hal.o"
+"stmmotorcontroller\stm32f0xx_hal_gpio.o"
+"stmmotorcontroller\stm32f0xx_hal_i2c.o"
+"stmmotorcontroller\stm32f0xx_hal_cortex.o"
+"stmmotorcontroller\stm32f0xx_hal_pwr_ex.o"
+"stmmotorcontroller\stm32f0xx_hal_tim.o"
+"stmmotorcontroller\stm32f0xx_hal_flash.o"
+"stmmotorcontroller\startup_stm32f072xb.o"
+"stmmotorcontroller\system_stm32f0xx.o"
+--library_type=microlib --strict --scatter "STMMotorController\STMMotorController.sct"
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "STMMotorController.map" -o STMMotorController\STMMotorController.axf
