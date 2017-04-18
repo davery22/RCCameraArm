@@ -5,8 +5,8 @@ import sys
 import serial
 
 s = socket.socket()
-host = sys.argv[1]
-port = 12345
+host = 'keeton-rpi2.uconnect.utah.edu'
+port = 8089
 s.connect((host, port))
 
 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
