@@ -8,18 +8,25 @@
  *  Global Variable and Type Declarations
  *  -------------------------------------------------------------------------------------------------------------
  */
-extern volatile int16_t error_integral;    // Integrated error signal
-
+extern volatile int16_t y_error_integral;    // Integrated error signal
+extern volatile int16_t z_error_integral;    // Integrated error signal
 
 /* -------------------------------------------------------------------------------------------------------------
  *  Global Variables for Debug Viewing (no real purpose to be global otherwise)
  * -------------------------------------------------------------------------------------------------------------
  */
-extern volatile uint8_t duty_cycle;    // Output PWM duty cycle
-extern volatile int16_t target_rpm;    // Desired speed target
-extern volatile int16_t motor_speed;   // Measured motor speed
-extern volatile int8_t adc_value;      // ADC measured motor current
-extern volatile int16_t error;         // Speed error signal
+extern volatile uint8_t y_duty_cycle;    // Output PWM duty cycle
+extern volatile int16_t y_target_rpm;    // Desired speed target
+extern volatile int16_t y_motor_speed;   // Measured motor speed
+extern volatile int16_t y_error;         // Speed error signal
+extern volatile int16_t y_pos;
+
+extern volatile uint8_t z_duty_cycle;    // Output PWM duty cycle
+extern volatile int16_t z_target_rpm;    // Desired speed target
+extern volatile int16_t z_motor_speed;   // Measured motor speed
+extern volatile int16_t z_error;         // Speed error signal
+extern volatile int16_t z_pos;
+
 extern volatile uint8_t Kp;            // Proportional gain
 extern volatile uint8_t Ki;            // Integral gain
 
@@ -32,8 +39,8 @@ extern volatile uint8_t Ki;            // Integral gain
 // Sets up the entire motor drive system
 void motor_init(void);
 
-// Set the duty cycle of the PWM, accepts (0-100)
-void pwm_setDutyCycle(uint8_t duty);
+// Set the duty cycle of the PWM, accepts (-100,100)
+void pwm_setDutyCycle(int8_t duty, uint8_t motor);
 
 // PI control code is called within a timer interrupt
 void PI_update(void);
