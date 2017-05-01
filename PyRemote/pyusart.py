@@ -27,4 +27,3 @@ while True:
         zz += int((z - zavg - (zz>>6)))
         print(yy>>12, "\t", zz>>12)
     print(yavg, '\t', zavg)
-
