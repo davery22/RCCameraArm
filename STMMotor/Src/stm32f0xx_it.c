@@ -34,8 +34,12 @@
 #include "stm32f0xx_hal.h"
 #include "stm32f0xx.h"
 #include "stm32f0xx_it.h"
+#include "motor.h"
 
 /* USER CODE BEGIN 0 */
+
+extern void USART1WriteChar(char);
+extern void ReadGyroData(char);
 
 /* USER CODE END 0 */
 
@@ -109,7 +113,7 @@ void SysTick_Handler(void)
 
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
-  HAL_SYSTICK_IRQHandler();
+  //HAL_SYSTICK_IRQHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
@@ -123,6 +127,54 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /* USER CODE BEGIN 1 */
+
+
+/**
+  * @brief  This function handles external interrupt requests.
+  * @param  None
+  * @retval None
+  */
+void EXTI0_1_IRQHandler(void)
+{
+	static char state;
+	
+	// Do something else
+	switch(state) {
+		case 0:
+			y_target_rpm = 80;
+			z_target_rpm = -80;
+			state++;
+			break;
+		case 1:
+			y_target_rpm = -80;
+			z_target_rpm = 80;
+			state++;
+			break;
+		default:
+			y_target_rpm = 0;
+			z_target_rpm = 0;
+			state = 0;
+			break;
+	}
+	
+	// Clear the interrupt
+	EXTI->PR |= EXTI_PR_PR0;
+}
+
+
+/**
+  * @brief  This function handles the USART1 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void USART1_IRQHandler(void)
+{
+	uint8_t ch = USART1->RDR;
+	//USART1WriteChar(ch);
+	
+	ReadGyroData(ch);
+}
+
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
