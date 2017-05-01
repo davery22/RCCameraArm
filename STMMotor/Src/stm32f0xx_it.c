@@ -142,11 +142,11 @@ void EXTI0_1_IRQHandler(void)
 	switch(state) {
 		case 0:
 			y_target_rpm = 80;
-			z_target_rpm = -40;
+			z_target_rpm = -80;
 			state++;
 			break;
 		case 1:
-			y_target_rpm = -40;
+			y_target_rpm = -80;
 			z_target_rpm = 80;
 			state++;
 			break;
@@ -169,8 +169,8 @@ void EXTI0_1_IRQHandler(void)
   */
 void USART1_IRQHandler(void)
 {
-	char ch = USART1->RDR;
-	USART1WriteChar(ch);
+	uint8_t ch = USART1->RDR;
+	//USART1WriteChar(ch);
 	
 	ReadGyroData(ch);
 }

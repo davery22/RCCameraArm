@@ -6,29 +6,25 @@
  *  Global Variable and Type Declarations
  * --------------------------------------------------------------------------------------------------------------
  */
-volatile int16_t y_error_integral;
-volatile int16_t z_error_integral;
 
-/* -------------------------------------------------------------------------------------------------------------
- *  Global Variables for STMStudio Debug Viewing (no real purpose to be global otherwise)
- * -------------------------------------------------------------------------------------------------------------
- */
 #define ARM_DOWN (5500)
 #define ARM_UP (0)
 #define ARM_LEFT (5500)
 #define ARM_RIGHT (0)
 
-volatile uint8_t y_duty_cycle;    // Output PWM duty cycle
-volatile int16_t y_target_rpm;    // Desired speed target
-volatile int16_t y_motor_speed;   // Measured motor speed
-volatile int16_t y_pos = ARM_DOWN;
-volatile int16_t y_error;         // Speed error signal
+volatile int8_t  y_duty_cycle;    	// Output PWM duty cycle
+volatile int16_t y_target_rpm;    	// Desired speed target
+volatile int16_t y_motor_speed;   	// Measured motor speed
+volatile int16_t y_error;         	// Speed error signal
+volatile int16_t y_error_integral;	// Error integral
+volatile int16_t y_pos = ARM_DOWN;	// Initial Position
 
-volatile uint8_t z_duty_cycle;    // Output PWM duty cycle
-volatile int16_t z_target_rpm;    // Desired speed target
-volatile int16_t z_motor_speed;   // Measured motor speed
-volatile int16_t z_pos = ARM_LEFT;
-volatile int16_t z_error;         // Speed error signal
+volatile int8_t  z_duty_cycle;    	// Output PWM duty cycle
+volatile int16_t z_target_rpm;    	// Desired speed target
+volatile int16_t z_motor_speed;   	// Measured motor speed
+volatile int16_t z_error;         	// Speed error signal
+volatile int16_t z_error_integral;	// Error integral
+volatile int16_t z_pos = ARM_RIGHT;	// Initial position
 
 volatile uint8_t Kp;              // Proportional gain
 volatile uint8_t Ki;              // Integral gain
@@ -37,34 +33,53 @@ volatile uint8_t Ki;              // Integral gain
  *  Motor Control and Initialization Functions
  * -------------------------------------------------------------------------------------------------------------
  */
+
+
+ /*
+  *	PINS IN USE FOR MOTOR CONTROL:
+  * 
+  * PB8  -  OUTPUT -  Motor Y Enable (PWM)
+  * PC4  -  OUTPUT -  Motor Y Direction A
+  * PC5  -  OUTPUT -  Motor Y Direction B
+  * PB4  -  INPUT  -  Motor Y Encoder In 1
+  * PB5  -  INPUT  -  Motor Y Encoder In 2
+  * 
+  * PB9  -  OUTPUT -  Motor Z Enable (PWM)
+  * PC10 -  OUTPUT -  Motor Z Direction A
+  * PC11 -  OUTPUT -  Motor Z Direction B
+  * PA5  -  INPUT  -  Motor Z Encoder In 1
+  * PB3  -  INPUT  -  Motor Z Encoder In 2
+  *
+  */
  
+
 // Sets up the entire motor drive system
-void motor_init(void)
+void Motor_Init(void)
 {
 	Kp = 27;     // Set default proportional gain
 	Ki = 6;     // Set default integral gain
 	
-	pwm_init();
-	encoder_init();
+	PWM_Init();
+	Encoder_Init();
 }
 
 
 // Sets up the PWM and direction signals to drive the H-Bridge
-void pwm_init(void)
+void PWM_Init(void)
 {
-	RCC->AHBENR |= (RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN);
+	RCC->AHBENR |= (RCC_AHBENR_GPIOBEN | RCC_AHBENR_GPIOCEN);
 	
 	// Motor Y Init
 	{
 		// Set up a pin for H-bridge PWM output (TIMER 16 CH1) - use PB8 -> AF2
 		GPIOB->MODER |= 0x20000; GPIOB->MODER &= ~0x10000;
 		GPIOB->AFR[1] |= 0x2; GPIOB->AFR[1] &= ~0xD;
-			
-		// Set up a few GPIO output pins for direction control - use PA4,PA5
-		GPIOA->MODER |= 0x500; GPIOA->MODER &= ~0xA00;
-		GPIOA->OTYPER &= ~0x30;
-		GPIOA->OSPEEDR &= ~0xF00;
-		GPIOA->PUPDR &= ~0xF00;
+		
+		// Set up a few GPIO output pins for direction control - use PC4,PC5
+		GPIOC->MODER |= 0x500; GPIOC->MODER &= ~0xA00;
+		GPIOC->OTYPER &= ~0x30;
+		GPIOC->OSPEEDR &= ~0xF00;
+		GPIOC->PUPDR &= ~0xF00;
 
 		// Set up PWM timer
 		RCC->APB2ENR |= RCC_APB2ENR_TIM16EN;
@@ -86,12 +101,12 @@ void pwm_init(void)
 		// Set up a pin for H-bridge PWM output (TIMER 17 CH1) - use PB9 -> AF2
 		GPIOB->MODER |= 0x80000; GPIOB->MODER &= ~0x40000;
 		GPIOB->AFR[1] |= 0x20; GPIOB->AFR[1] &= ~0xD0;
-		
-		// Set up a few GPIO output pins for direction control - use PA8,PA9
-		GPIOA->MODER |= 0x50000; GPIOA->MODER &= ~0xA0000;
-		GPIOA->OTYPER &= ~0x300;
-		GPIOA->OSPEEDR &= ~0xF0000;
-		GPIOA->PUPDR &= ~0xF0000;
+
+		// Set up a few GPIO output pins for direction control - use PC10,PC11
+		GPIOC->MODER |= 0x500000; GPIOC->MODER &= ~0xA00000;
+		GPIOC->OTYPER &= ~0xC00;
+		GPIOC->OSPEEDR &= ~0xF00000;
+		GPIOC->PUPDR &= ~0xF00000;
 
 		// Set up PWM timer
 		RCC->APB2ENR |= RCC_APB2ENR_TIM17EN;
@@ -111,7 +126,7 @@ void pwm_init(void)
 
 
 // Sets up encoder interface to read motor speed
-void encoder_init(void)
+void Encoder_Init(void)
 {    
 	RCC->AHBENR |= (RCC_AHBENR_GPIOAEN | RCC_AHBENR_GPIOBEN);
 	
@@ -140,9 +155,9 @@ void encoder_init(void)
 
 	// Motor Z Init
 	{
-		// Set up encoder input (5V TOLERANT!) pins (TIMER 2 CH1 and CH2) - use PA15,PB3 -> AF2
-		GPIOA->MODER |= 0x80000000; GPIOA->MODER &= ~0x40000000;
-		GPIOA->AFR[1] |= 0x20000000; GPIOA->AFR[1] &= ~0xD0000000;
+		// Set up encoder input (5V TOLERANT!) pins (TIMER 2 CH1 and CH2) - use PA5,PB3 -> AF2
+		GPIOA->MODER |= 0x800; GPIOA->MODER &= ~0x400;
+		GPIOA->AFR[0] |= 0x200000; GPIOA->AFR[0] &= ~0xD00000;
 
 		GPIOB->MODER |= 0x80; GPIOB->MODER &= ~0x40;
 		GPIOB->AFR[0] |= 0x2000; GPIOB->AFR[0] &= ~0xD000;
@@ -164,11 +179,11 @@ void encoder_init(void)
 		TIM2->CR1 |= TIM_CR1_CEN;                               // Enable timer
 	}
     
-	// Configure a second timer (TIM6) to fire an ISR on update event
+	// Configure another timer (TIM6) to fire an ISR on update event
 	// Used to periodically check and update speed variable
 	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;
 
-	// Choose sampling rate to give 2:1 ration between encoder value and target speed
+	// Choose sampling rate to give 2:1 ratio between encoder value and target speed
 	TIM6->PSC = SystemCoreClock/1000000 - 1;
 	TIM6->ARR = 37500; 
 	
@@ -181,31 +196,43 @@ void encoder_init(void)
 
 
 
-
-
-
 #define MOTOR_Y (0)
 #define MOTOR_Z (1)
 
 #define MOTOR_Y_FORWARD() \
-	GPIOA->ODR |= 0x20; \
-	GPIOA->ODR &= ~0x10; \
+	GPIOC->ODR |= 0x20; \
+	GPIOC->ODR &= ~0x10; \
 
 #define MOTOR_Y_REVERSE() \
-	GPIOA->ODR |= 0x10; \
-	GPIOA->ODR &= ~0x20; \
+	GPIOC->ODR |= 0x10; \
+	GPIOC->ODR &= ~0x20; \
 
 #define MOTOR_Z_FORWARD() \
-	GPIOA->ODR |= 0x200; \
-	GPIOA->ODR &= ~0x100; \
+	GPIOC->ODR |= 0x800; \
+	GPIOC->ODR &= ~0x400; \
 
 #define MOTOR_Z_REVERSE() \
-	GPIOA->ODR |= 0x100; \
-	GPIOA->ODR &= ~0x200; \
+	GPIOC->ODR |= 0x400; \
+	GPIOC->ODR &= ~0x800; \
 
 // Set the duty cycle of the PWM, accepts (-100,100)
-void pwm_setDutyCycle(int8_t duty, uint8_t motor)
+void PWM_SetDutyCycle(int8_t duty, uint8_t motor)
 {
+	if (motor == MOTOR_Y)
+	{
+		if ((duty > 0 && y_pos > ARM_DOWN) || (duty < 0 && y_pos < ARM_UP))
+		{
+			duty = 0;
+		}
+	}
+	else
+	{
+		if ((duty > 0 && z_pos > ARM_LEFT) || (duty < 0 && z_pos < ARM_RIGHT))
+		{
+			duty = 0;
+		}
+	}
+	
 	// Validate
 	if (duty < -100 || duty > 100)
 	{
@@ -216,20 +243,20 @@ void pwm_setDutyCycle(int8_t duty, uint8_t motor)
 	if (duty < 0)
 	{
 		duty = -duty;
-		if (motor == MOTOR_Y) { MOTOR_Y_REVERSE(); /*} else {*/ MOTOR_Z_REVERSE(); }
+		if (motor == MOTOR_Y) { MOTOR_Y_REVERSE(); } else { MOTOR_Z_REVERSE(); }
 	}
 	else if (duty > 0)
 	{
-		if (motor == MOTOR_Y) { MOTOR_Y_FORWARD(); /*} else {*/ MOTOR_Z_FORWARD(); }
+		if (motor == MOTOR_Y) { MOTOR_Y_FORWARD(); } else { MOTOR_Z_FORWARD(); }
 	}
 
 	// Adjust motor duty cycle
 	if (motor == MOTOR_Y)
 	{
 		TIM16->CCR1 = ((uint32_t)duty*TIM16->ARR)/100;  // Use linear transform to produce CCR1 value
-	/*}
+	}
 	else
-	{*/
+	{
 		TIM17->CCR1 = ((uint32_t)duty*TIM17->ARR)/100;  // Use linear transform to produce CCR1 value
 	}
 }
@@ -237,7 +264,7 @@ void pwm_setDutyCycle(int8_t duty, uint8_t motor)
 
 /** Adjusts the target_rpm if it is driving the position out of bounds
 */
-void bound_pos(uint8_t motor)
+void Clamp_Position(uint8_t motor)
 {
 	if (motor == MOTOR_Y)
 	{
@@ -256,7 +283,7 @@ void bound_pos(uint8_t motor)
 		{
 			z_pos = ARM_RIGHT; z_target_rpm = 0;
 		}
-		else if (y_pos > ARM_LEFT)
+		else if (z_pos > ARM_LEFT)
 		{
 			z_pos = ARM_LEFT; z_target_rpm = 0;
 		}
@@ -269,25 +296,25 @@ void TIM6_DAC_IRQHandler(void)
 {
 	y_motor_speed = (TIM3->CNT - 0x7FFF);
 	y_pos += y_motor_speed/2;
-	bound_pos(MOTOR_Y);
+	Clamp_Position(MOTOR_Y);
 	
 	TIM3->CNT = 0x7FFF; // Reset back to center point
 
 	z_motor_speed = (TIM2->CNT - 0x7FFF);
 	z_pos += z_motor_speed/2;
-	bound_pos(MOTOR_Z);
+	Clamp_Position(MOTOR_Z);
 	
 	TIM2->CNT = 0x7FFF; // Reset back to center point
 	
 	// Call the PI update function
-	PI_update();
+	PI_Update();
 
 	// Acknowledge the interrupt
 	TIM6->SR &= ~TIM_SR_UIF;
 }
 
 
-void PI_update(void)
+void PI_Update(void)
 {
 	// Motor Y PI control
 	{
@@ -309,12 +336,12 @@ void PI_update(void)
 		// Clamp the output value between -100 and 100
 		if (y_output < -100) y_output = -100; else if (y_output > 100) y_output = 100;
 			
-		pwm_setDutyCycle(y_output, MOTOR_Y);
+		PWM_SetDutyCycle(y_output, MOTOR_Y);
 		y_duty_cycle = y_output;
 	}
 
 	// Motor Z PI control
-	/*{
+	{
 		// calculate error signal and write to "error" variable
 		z_error = z_target_rpm - z_motor_speed/2;
 		
@@ -333,7 +360,7 @@ void PI_update(void)
 		// Clamp the output value between -100 and 100
 		if (z_output < -100) z_output = -100; else if (z_output > 100) z_output = 100;
 		
-		pwm_setDutyCycle(z_output, MOTOR_Z);
+		PWM_SetDutyCycle(z_output, MOTOR_Z);
 		z_duty_cycle = z_output;
-	}*/
+	}
 }
