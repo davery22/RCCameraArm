@@ -12,6 +12,9 @@ from time import sleep, time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from wsgiref.simple_server import make_server
 import socket
+import serial
+from numpy import int8
+from numpy import uint8
 
 import picamera
 from ws4py.websocket import WebSocket
@@ -130,10 +133,10 @@ def get_b(data):
     return data[4]
 
 def get_y(data):
-    return (data[8] << 1) + data[9] - 512
+    return (data[8] << 1) + data[9]# - 512
 
 def get_z(data):
-    return (data[12]<<1)+data[13] - 512
+    return (data[12]<<1)+data[13]# - 512
 
 
 def main():
@@ -178,25 +181,52 @@ def main():
             remote.bind(('', 8089))
             remote.listen(5)
             c, addr = remote.accept()
+
+            print('Opening serial output')
+            #ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+            print('Looking for remote connection...')
             print('Remote connected from', addr)
+
+            pic_name = 1;
             while True:
                 data = c.recv(1024)
                 if len(data) < 14:
                     continue
-                if get_t(data) > zoom and HZOOM > 0.0:
+                if data[0] == 116 and get_t(data) > zoom and HZOOM > 0.0:
                     X += diff/2.0
                     Y += diff/2.0
                     HZOOM -= diff
                     VZOOM -= diff
                     zoom = get_t(data)
-                    print(zoom)
-                elif get_t(data) < zoom and HZOOM < 1.0:
+                    #print(zoom)
+                    #print(data)
+                elif data[0] == 116 and get_t(data) < zoom and HZOOM < 1.0:
                     X -= diff/2.0
                     Y -= diff/2.0
                     HZOOM += diff
                     VZOOM += diff
                     zoom = get_t(data)
+                    #print(zoom)
+                    #print(data)
+                
+                if(data[6] == 121 and data[10] == 122):
+                    #print(data[6:14])
+                    #ser.write(data[6:14])
+                    y = get_y(data)
+                    z = get_z(data)
+                    y = int8(round((y/32)/3))
+                    z = int8(round((z/32)/3))
+                    y = uint8(y-4)
+                    z = uint8(z-4)
+                    print(y)
+                    print(z)
+                    send_data = [0x7F, y, z, 0x8F]
+                    #ser.write(send_data)
 
+                if data[3] == 98 and button != get_b(data):
+                    camera.capture('image%02d.jpg' % pic_name, use_video_port = True)
+                    pic_name = pic_name + 1;
+                    button = get_b(data)
                 camera.zoom = (X, Y, HZOOM, VZOOM)
                 diff = HZOOM/20.0
                 #camera.wait_recording(5)
